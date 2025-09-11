@@ -5,18 +5,21 @@ import { PluginMetadata } from '../../types/plugin.types';
 // Mock the plugin components
 jest.mock('../../plugins/CsvDataLoaderPlugin', () => {
   return function MockCsvDataLoaderPlugin() {
+    const React = require('react');
     return React.createElement('div', { 'data-testid': 'csv-loader' }, 'CSV Loader Plugin');
   };
 });
 
 jest.mock('../../plugins/JsonDataLoaderPlugin', () => {
   return function MockJsonDataLoaderPlugin() {
+    const React = require('react');
     return React.createElement('div', { 'data-testid': 'json-loader' }, 'JSON Loader Plugin');
   };
 });
 
 jest.mock('../../plugins/AnalyticsDashboardPlugin', () => {
   return function MockAnalyticsDashboardPlugin() {
+    const React = require('react');
     return React.createElement('div', { 'data-testid': 'analytics-dashboard' }, 'Analytics Dashboard Plugin');
   };
 });
