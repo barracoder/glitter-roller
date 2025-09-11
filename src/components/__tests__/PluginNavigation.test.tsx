@@ -146,6 +146,6 @@ describe('PluginNavigation', () => {
 
     expect(screen.getByText('Test Loader 2')).toBeInTheDocument();
     // Test Loader 2 has no description, so it shouldn't appear
-    expect(screen.queryByText('Test loader description')).toBeInTheDocument(); // Only Test Loader 1's description
+    expect(screen.getByText('Test loader description')).toBeInTheDocument(); // Only Test Loader 1's description
   });
 });

@@ -38,7 +38,7 @@ function App() {
   };
 
   return (
-    <div style={appStyle}>
+    <div style={appStyle} data-testid="app-container">
       <PluginNavigation
         pluginHierarchy={appConfig.pluginHierarchy}
         selectedPluginId={selectedPluginId}

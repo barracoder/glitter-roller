@@ -58,8 +58,8 @@ describe('MainContentArea', () => {
   });
 
   test('has correct styling for content area', () => {
-    const { container } = render(<MainContentArea selectedPlugin={null} />);
-    const contentDiv = container.firstChild as HTMLElement;
+    render(<MainContentArea selectedPlugin={null} />);
+    const contentDiv = screen.getByTestId('main-content-area');
 
     expect(contentDiv).toHaveStyle('flex: 1');
     expect(contentDiv).toHaveStyle('height: 100vh');

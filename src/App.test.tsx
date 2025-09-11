@@ -90,8 +90,8 @@ describe('App', () => {
   });
 
   test('has correct app layout styling', () => {
-    const { container } = render(<App />);
-    const appDiv = container.firstChild as HTMLElement;
+    render(<App />);
+    const appDiv = screen.getByTestId('app-container');
 
     expect(appDiv).toHaveStyle('display: flex');
     expect(appDiv).toHaveStyle('height: 100vh');

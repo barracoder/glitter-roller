@@ -22,7 +22,7 @@ const AnalyticsDashboardPlugin: React.FC<PluginProps> = ({ config, pluginId }) =
 
       <div style={{ marginTop: '20px' }}>
         <h3>Analytics Overview</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }} data-testid="analytics-grid">
           <div style={{ background: '#e3f2fd', padding: '15px', borderRadius: '4px' }}>
             <h4>Total Users</h4>
             <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#1976d2' }}>1,234</p>

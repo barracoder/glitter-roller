@@ -1,5 +1,3 @@
-import { ReactComponentElement } from 'react';
-
 export interface PluginConfig {
   connectionStrings?: Record<string, string>;
   apiBaseUrls?: Record<string, string>;
