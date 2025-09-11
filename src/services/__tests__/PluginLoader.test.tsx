@@ -1,4 +1,3 @@
-import React from 'react';
 import { PluginLoader } from '../PluginLoader';
 import { PluginMetadata } from '../../types/plugin.types';
 

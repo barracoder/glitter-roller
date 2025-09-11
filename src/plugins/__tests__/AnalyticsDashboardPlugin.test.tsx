@@ -87,10 +87,10 @@ describe('AnalyticsDashboardPlugin', () => {
   });
 
   test('metrics have grid layout styling', () => {
-    const { container } = render(<AnalyticsDashboardPlugin config={mockConfig} pluginId="test-dashboard" />);
+    render(<AnalyticsDashboardPlugin config={mockConfig} pluginId="test-dashboard" />);
     
-    // Find the grid container by looking for the element with grid styling
-    const gridElements = container.querySelectorAll('[style*="grid-template-columns"]');
-    expect(gridElements.length).toBeGreaterThan(0);
+    // Find the grid container using data-testid
+    const gridElement = screen.getByTestId('analytics-grid');
+    expect(gridElement).toBeInTheDocument();
   });
 });

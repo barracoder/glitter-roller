@@ -25,7 +25,7 @@ const MainContentArea: React.FC<MainContentAreaProps> = ({ selectedPlugin }) => 
 
   if (!selectedPlugin) {
     return (
-      <div style={contentStyle}>
+      <div style={contentStyle} data-testid="main-content-area">
         <div style={placeholderStyle}>
           <div style={{ fontSize: '48px', marginBottom: '20px' }}>🔌</div>
           <h2>Welcome to Glitter Roller</h2>
@@ -38,7 +38,7 @@ const MainContentArea: React.FC<MainContentAreaProps> = ({ selectedPlugin }) => 
   const PluginComponent = selectedPlugin.component;
 
   return (
-    <div style={contentStyle}>
+    <div style={contentStyle} data-testid="main-content-area">
       <PluginComponent 
         config={selectedPlugin.metadata.config}
         pluginId={selectedPlugin.metadata.id}
