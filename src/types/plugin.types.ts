@@ -15,6 +15,7 @@ export interface PluginMetadata {
   description?: string;
   category: string;
   config: PluginConfig;
+  component: string; // Reference to component key in the registry
 }
 
 export interface Plugin {
@@ -33,5 +34,5 @@ export interface PluginHierarchy {
 
 export interface AppConfig {
   plugins: PluginMetadata[];
-  pluginHierarchy: PluginHierarchy;
+  componentRegistry: Record<string, React.ComponentType<PluginProps>>;
 }

@@ -1,24 +1,28 @@
-import { Plugin, PluginMetadata } from '../types/plugin.types';
-import CsvDataLoaderPlugin from '../plugins/CsvDataLoaderPlugin';
-import JsonDataLoaderPlugin from '../plugins/JsonDataLoaderPlugin';
-import AnalyticsDashboardPlugin from '../plugins/AnalyticsDashboardPlugin';
-
-// Plugin registry mapping plugin IDs to their components
-const pluginRegistry: Record<string, React.ComponentType<any>> = {
-  'data-loader-1': CsvDataLoaderPlugin,
-  'data-loader-2': JsonDataLoaderPlugin,
-  'dashboard-1': AnalyticsDashboardPlugin,
-};
+import { Plugin, PluginMetadata, AppConfig } from '../types/plugin.types';
 
 export class PluginLoader {
+  private static config: AppConfig | null = null;
+
+  /**
+   * Initialize the plugin loader with config
+   */
+  static initialize(config: AppConfig) {
+    this.config = config;
+  }
+
   /**
    * Load a plugin by its metadata
    */
   static loadPlugin(metadata: PluginMetadata): Plugin | null {
-    const component = pluginRegistry[metadata.id];
+    if (!this.config) {
+      console.error('PluginLoader not initialized. Call PluginLoader.initialize(config) first.');
+      return null;
+    }
+
+    const component = this.config.componentRegistry[metadata.component];
     
     if (!component) {
-      console.warn(`Plugin component not found for ID: ${metadata.id}`);
+      console.warn(`Plugin component not found for component key: ${metadata.component}`);
       return null;
     }
 
@@ -41,13 +45,19 @@ export class PluginLoader {
    * Get available plugin IDs
    */
   static getAvailablePluginIds(): string[] {
-    return Object.keys(pluginRegistry);
+    if (!this.config) {
+      return [];
+    }
+    return this.config.plugins.map(plugin => plugin.id);
   }
 
   /**
    * Check if a plugin is available
    */
   static isPluginAvailable(pluginId: string): boolean {
-    return pluginId in pluginRegistry;
+    if (!this.config) {
+      return false;
+    }
+    return this.config.plugins.some(plugin => plugin.id === pluginId);
   }
 }
