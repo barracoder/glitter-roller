@@ -4,6 +4,7 @@ import MainContentArea from './components/MainContentArea';
 import { PluginLoader } from './services/PluginLoader';
 import { appConfig } from './config/app.config';
 import { Plugin } from './types/plugin.types';
+import { generatePluginHierarchy } from './utils/pluginUtils';
 import './App.css';
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
   const [loadedPlugins, setLoadedPlugins] = useState<Plugin[]>([]);
 
   useEffect(() => {
-    // Load all plugins on app initialization
+    // Initialize PluginLoader with config and load all plugins on app initialization
+    PluginLoader.initialize(appConfig);
     const plugins = PluginLoader.loadPlugins(appConfig.plugins);
     setLoadedPlugins(plugins);
   }, []);
@@ -37,10 +39,13 @@ function App() {
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif',
   };
 
+  // Generate plugin hierarchy dynamically from plugins array
+  const pluginHierarchy = generatePluginHierarchy(appConfig.plugins);
+
   return (
     <div style={appStyle} data-testid="app-container">
       <PluginNavigation
-        pluginHierarchy={appConfig.pluginHierarchy}
+        pluginHierarchy={pluginHierarchy}
         selectedPluginId={selectedPluginId}
         onPluginSelect={handlePluginSelect}
       />
