@@ -3,6 +3,15 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from './App';
 
+// Mock the app config to disable authentication for tests
+jest.mock('./config/app.config', () => ({
+  ...jest.requireActual('./config/app.config'),
+  appConfig: {
+    ...jest.requireActual('./config/app.config').appConfig,
+    requireAuthentication: false,
+  },
+}));
+
 // Mock the plugin components to avoid rendering actual UI
 jest.mock('./plugins/CsvDataLoaderPlugin', () => {
   return function MockCsvDataLoaderPlugin({ pluginId }: { pluginId: string }) {

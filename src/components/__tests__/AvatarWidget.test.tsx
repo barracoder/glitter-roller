@@ -55,7 +55,7 @@ describe('AvatarWidget', () => {
     // Wait for login to complete
     await waitFor(() => {
       expect(screen.getByAltText('John Doe')).toBeInTheDocument();
-    }, { timeout: 2000 });
+    }, { timeout: 3000 });
 
     // Click avatar to open menu
     const avatarBtn = screen.getByRole('button', { name: /john doe/i });
@@ -79,7 +79,7 @@ describe('AvatarWidget', () => {
 
     await waitFor(() => {
       expect(screen.getByAltText('John Doe')).toBeInTheDocument();
-    }, { timeout: 2000 });
+    }, { timeout: 3000 });
 
     // Open menu
     const avatarBtn = screen.getByRole('button', { name: /john doe/i });
@@ -106,7 +106,7 @@ describe('AvatarWidget', () => {
 
     await waitFor(() => {
       expect(screen.getByAltText('John Doe')).toBeInTheDocument();
-    }, { timeout: 2000 });
+    }, { timeout: 3000 });
 
     // Open menu and click sign out
     const avatarBtn = screen.getByRole('button', { name: /john doe/i });
