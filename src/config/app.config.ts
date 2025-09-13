@@ -13,7 +13,7 @@ export const oauthConfig: OAuthConfig = {
 };
 
 export const appConfig: AppConfig = {
-  requireAuthentication: true, // Config flag to determine if authentication is required
+  requireAuthentication: process.env.REACT_APP_E2E_TESTS !== 'true', // Disable auth during e2e tests
   plugins: [
     {
       id: 'data-loader-1',
