@@ -78,22 +78,25 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = () => {
     dispatch({ type: 'LOGIN_START' });
     
-    // Simulate OAuth flow - in production this would redirect to OAuth provider
-    // For demo purposes, we'll simulate a successful login
+    // For demo purposes, we'll simulate Microsoft OAuth flow
+    // In production, this would redirect to Microsoft OAuth provider:
+    // window.location.href = `${oauthConfig.authorizationUrl}?client_id=${oauthConfig.clientId}&response_type=code&redirect_uri=${encodeURIComponent(oauthConfig.redirectUri)}&scope=${encodeURIComponent(oauthConfig.scopes.join(' '))}`;
+    
+    // Simulate Microsoft OAuth response
     setTimeout(() => {
       const mockUser: User = {
-        id: '1',
+        id: 'user123',
         name: 'John Doe',
         email: 'john.doe@example.com',
-        avatar: `https://ui-avatars.com/api/?name=John+Doe&background=007bff&color=fff`,
+        avatar: `https://ui-avatars.com/api/?name=John+Doe&background=0078d4&color=fff`,
       };
       
       // Store auth data
-      localStorage.setItem('auth_token', 'mock_token_' + Date.now());
+      localStorage.setItem('auth_token', 'mock_ms_token_' + Date.now());
       localStorage.setItem('user_data', JSON.stringify(mockUser));
       
       dispatch({ type: 'LOGIN_SUCCESS', payload: mockUser });
-    }, 1000);
+    }, 2000); // Longer delay to simulate real OAuth flow
   };
 
   const logout = () => {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PluginNavigation from './components/PluginNavigation';
 import MainContentArea from './components/MainContentArea';
 import AppHeader from './components/AppHeader';
+import AuthGuard from './components/AuthGuard';
 import { AuthProvider } from './contexts/AuthContext';
 import { PluginLoader } from './services/PluginLoader';
 import { appConfig } from './config/app.config';
@@ -53,17 +54,19 @@ function App() {
 
   return (
     <AuthProvider>
-      <div style={appStyle} data-testid="app-container">
-        <AppHeader />
-        <div style={mainAreaStyle}>
-          <PluginNavigation
-            pluginHierarchy={pluginHierarchy}
-            selectedPluginId={selectedPluginId}
-            onPluginSelect={handlePluginSelect}
-          />
-          <MainContentArea selectedPlugin={selectedPlugin} />
+      <AuthGuard requireAuthentication={appConfig.requireAuthentication || false}>
+        <div style={appStyle} data-testid="app-container">
+          <AppHeader />
+          <div style={mainAreaStyle}>
+            <PluginNavigation
+              pluginHierarchy={pluginHierarchy}
+              selectedPluginId={selectedPluginId}
+              onPluginSelect={handlePluginSelect}
+            />
+            <MainContentArea selectedPlugin={selectedPlugin} />
+          </div>
         </div>
-      </div>
+      </AuthGuard>
     </AuthProvider>
   );
 }

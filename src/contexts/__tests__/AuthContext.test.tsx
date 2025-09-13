@@ -65,7 +65,7 @@ describe('AuthContext', () => {
     // Wait for loading to finish
     await waitFor(() => {
       expect(screen.getByTestId('loading-status')).toHaveTextContent('not-loading');
-    }, { timeout: 1000 });
+    }, { timeout: 3000 });
 
     expect(screen.getByTestId('user-info')).toHaveTextContent('John Doe - john.doe@example.com');
   });

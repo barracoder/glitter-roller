@@ -49,7 +49,7 @@ const AvatarWidget: React.FC = () => {
   };
 
   const loginButtonStyle: React.CSSProperties = {
-    backgroundColor: '#007bff',
+    backgroundColor: '#0078d4',
     color: 'white',
     border: 'none',
     borderRadius: '6px',
@@ -58,6 +58,16 @@ const AvatarWidget: React.FC = () => {
     fontSize: '14px',
     fontWeight: '500',
     transition: 'background-color 0.2s',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  };
+
+  const microsoftIconStyle: React.CSSProperties = {
+    width: '16px',
+    height: '16px',
+    background: 'linear-gradient(45deg, #f25022 25%, #7fba00 25%, #7fba00 50%, #00a4ef 50%, #00a4ef 75%, #ffb900 75%)',
+    borderRadius: '2px',
   };
 
   const menuStyle: React.CSSProperties = {
@@ -119,12 +129,12 @@ const AvatarWidget: React.FC = () => {
           disabled={authState.isLoading}
           onMouseEnter={(e) => {
             if (!authState.isLoading) {
-              e.currentTarget.style.backgroundColor = '#0056b3';
+              e.currentTarget.style.backgroundColor = '#106ebe';
             }
           }}
           onMouseLeave={(e) => {
             if (!authState.isLoading) {
-              e.currentTarget.style.backgroundColor = '#007bff';
+              e.currentTarget.style.backgroundColor = '#0078d4';
             }
           }}
         >
@@ -134,7 +144,10 @@ const AvatarWidget: React.FC = () => {
               Signing in...
             </div>
           ) : (
-            'Sign In'
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={microsoftIconStyle}></div>
+              Sign In
+            </div>
           )}
         </button>
       </div>

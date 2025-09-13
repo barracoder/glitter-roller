@@ -7,12 +7,13 @@ import AnalyticsDashboardPlugin from '../plugins/AnalyticsDashboardPlugin';
 export const oauthConfig: OAuthConfig = {
   clientId: 'glitter-roller-app',
   redirectUri: window.location.origin + '/auth/callback',
-  scopes: ['read:user', 'user:email'],
-  authorizationUrl: 'https://github.com/login/oauth/authorize',
-  tokenUrl: 'https://github.com/login/oauth/access_token',
+  scopes: ['openid', 'profile', 'email'],
+  authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+  tokenUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
 };
 
 export const appConfig: AppConfig = {
+  requireAuthentication: true, // Config flag to determine if authentication is required
   plugins: [
     {
       id: 'data-loader-1',

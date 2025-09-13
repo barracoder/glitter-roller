@@ -35,4 +35,5 @@ export interface PluginHierarchy {
 export interface AppConfig {
   plugins: PluginMetadata[];
   componentRegistry: Record<string, React.ComponentType<PluginProps>>;
+  requireAuthentication?: boolean;
 }
