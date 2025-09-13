@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PluginNavigation from './components/PluginNavigation';
 import MainContentArea from './components/MainContentArea';
+import AppHeader from './components/AppHeader';
+import { AuthProvider } from './contexts/AuthContext';
 import { PluginLoader } from './services/PluginLoader';
 import { appConfig } from './config/app.config';
 import { Plugin } from './types/plugin.types';
@@ -35,22 +37,34 @@ function App() {
 
   const appStyle: React.CSSProperties = {
     display: 'flex',
+    flexDirection: 'column',
     height: '100vh',
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif',
+  };
+
+  const mainAreaStyle: React.CSSProperties = {
+    display: 'flex',
+    flex: 1,
+    overflow: 'hidden',
   };
 
   // Generate plugin hierarchy dynamically from plugins array
   const pluginHierarchy = generatePluginHierarchy(appConfig.plugins);
 
   return (
-    <div style={appStyle} data-testid="app-container">
-      <PluginNavigation
-        pluginHierarchy={pluginHierarchy}
-        selectedPluginId={selectedPluginId}
-        onPluginSelect={handlePluginSelect}
-      />
-      <MainContentArea selectedPlugin={selectedPlugin} />
-    </div>
+    <AuthProvider>
+      <div style={appStyle} data-testid="app-container">
+        <AppHeader />
+        <div style={mainAreaStyle}>
+          <PluginNavigation
+            pluginHierarchy={pluginHierarchy}
+            selectedPluginId={selectedPluginId}
+            onPluginSelect={handlePluginSelect}
+          />
+          <MainContentArea selectedPlugin={selectedPlugin} />
+        </div>
+      </div>
+    </AuthProvider>
   );
 }
 
