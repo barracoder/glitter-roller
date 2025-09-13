@@ -8,7 +8,7 @@ interface MainContentAreaProps {
 const MainContentArea: React.FC<MainContentAreaProps> = ({ selectedPlugin }) => {
   const contentStyle: React.CSSProperties = {
     flex: 1,
-    height: '100vh',
+    height: '100%',
     overflow: 'auto',
     backgroundColor: '#ffffff',
   };

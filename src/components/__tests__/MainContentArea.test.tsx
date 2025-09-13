@@ -62,7 +62,7 @@ describe('MainContentArea', () => {
     const contentDiv = screen.getByTestId('main-content-area');
 
     expect(contentDiv).toHaveStyle('flex: 1');
-    expect(contentDiv).toHaveStyle('height: 100vh');
+    expect(contentDiv).toHaveStyle('height: 100%');
     expect(contentDiv).toHaveStyle('overflow: auto');
     expect(contentDiv).toHaveStyle('background-color: #ffffff');
   });

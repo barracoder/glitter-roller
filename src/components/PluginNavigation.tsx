@@ -23,7 +23,7 @@ const PluginNavigation: React.FC<PluginNavigationProps> = ({
 
   const navigationStyle: React.CSSProperties = {
     width: '300px',
-    height: '100vh',
+    height: '100%',
     backgroundColor: '#f8f9fa',
     borderRight: '1px solid #dee2e6',
     padding: '20px',

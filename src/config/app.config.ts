@@ -1,7 +1,16 @@
 import { AppConfig } from '../types/plugin.types';
+import { OAuthConfig } from '../types/auth.types';
 import CsvDataLoaderPlugin from '../plugins/CsvDataLoaderPlugin';
 import JsonDataLoaderPlugin from '../plugins/JsonDataLoaderPlugin';
 import AnalyticsDashboardPlugin from '../plugins/AnalyticsDashboardPlugin';
+
+export const oauthConfig: OAuthConfig = {
+  clientId: 'glitter-roller-app',
+  redirectUri: window.location.origin + '/auth/callback',
+  scopes: ['read:user', 'user:email'],
+  authorizationUrl: 'https://github.com/login/oauth/authorize',
+  tokenUrl: 'https://github.com/login/oauth/access_token',
+};
 
 export const appConfig: AppConfig = {
   plugins: [
