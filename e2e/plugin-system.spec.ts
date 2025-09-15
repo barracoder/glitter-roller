@@ -5,9 +5,9 @@ test.describe('Glitter Roller Plugin System', () => {
     await page.goto('/');
 
     // Check that the app title and navigation are present
-    await expect(page.getByRole('heading', { name: 'Plugins' })).toBeVisible();
-    await expect(page.getByText('Welcome to Glitter Roller')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Welcome to Glitter Roller' })).toBeVisible();
     await expect(page.getByText('Select a plugin from the navigation panel to get started.')).toBeVisible();
+    await expect(page.getByText('Plugins')).toBeVisible();
   });
 
   test('should expand plugin categories and show plugins', async ({ page }) => {
