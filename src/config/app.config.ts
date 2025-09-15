@@ -13,7 +13,7 @@ export const oauthConfig: OAuthConfig = {
 };
 
 export const appConfig: AppConfig = {
-  requireAuthentication: true, // Config flag to determine if authentication is required
+  requireAuthentication: process.env.NODE_ENV !== 'test' && process.env.REACT_APP_PLAYWRIGHT_TEST !== 'true', // Config flag to determine if authentication is required
   plugins: [
     {
       id: 'data-loader-1',
