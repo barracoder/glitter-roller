@@ -1,6 +1,22 @@
 # Glitter Roller
 
-A React/TypeScript plugin-friendly website that provides a shell for configurable plugins with a hierarchical navigation system.
+A React/TypeScript plugin-friendly website that provides a shell for configurable plugins with a hierarchical navigation system. Now also available as a Blazor WebAssembly version!
+
+## Versions Available
+
+### 🔵 React Dashboard (Original)
+- **Framework**: React 19 + TypeScript
+- **Location**: `/src` directory  
+- **URL**: `http://localhost:3000`
+- **Command**: `npm start`
+
+### 🟢 Blazor Dashboard (New!)
+- **Framework**: Blazor WebAssembly + .NET 8
+- **Location**: `/Dashboard.Blazor` directory
+- **URL**: `http://localhost:5278` 
+- **Command**: `cd Dashboard.Blazor && dotnet run`
+
+Both versions share identical design principles, plugin architecture, and comprehensive E2E testing.
 
 ## Features
 
@@ -43,14 +59,17 @@ npm run build
 ### Running Tests
 
 ```bash
-# Unit tests
-npm test
+# React version tests
+npm test -- --coverage --watchAll=false
 
-# Unit tests with coverage
-npm test -- --coverage
-
-# E2E tests (requires Playwright setup)
+# React E2E tests
 npm run test:e2e
+
+# Blazor build and E2E tests  
+npm run blazor:test
+
+# Run only Blazor E2E tests
+npm run test:e2e:blazor
 ```
 
 ## Plugin System
@@ -193,11 +212,19 @@ Current coverage metrics:
 
 ## Technology Stack
 
+### React Version
 - **Frontend**: React 19.1, TypeScript 4.9
 - **Styling**: Inline CSS (easily replaceable with styled-components, CSS modules, etc.)
 - **Testing**: Jest, React Testing Library, Playwright
 - **Build**: Create React App, npm/webpack
 - **Development**: Hot reloading, source maps, dev server
+
+### Blazor Version  
+- **Frontend**: Blazor WebAssembly, .NET 8, C#
+- **Styling**: Identical inline CSS to React version
+- **Testing**: Playwright E2E tests (matching React tests)
+- **Build**: dotnet publish, WebAssembly
+- **Development**: Hot reload, debugging, dev server
 
 ## Contributing
 

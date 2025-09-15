@@ -69,10 +69,43 @@ jobs:
     - name: Run E2E tests
       run: npm run test:e2e
       
-    - name: Upload Playwright report
+  e2e-tests-blazor:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET 8
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+      
+    - name: Setup Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Install Node.js dependencies
+      run: npm ci
+      
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps
+      
+    - name: Build Blazor application
+      run: |
+        cd Dashboard.Blazor
+        dotnet build
+      
+    - name: Run Blazor E2E tests
+      run: npm run test:e2e:blazor
+      
+    - name: Upload Blazor Playwright report
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: playwright-report
+        name: blazor-playwright-report
         path: playwright-report/
         retention-days: 30
