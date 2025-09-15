@@ -1,0 +1,42 @@
+@using Dashboard.Blazor.Models
+@inherits Dashboard.Blazor.Components.Plugins.BasePluginComponent
+
+<div style="padding: 20px;">
+    <h2>JSON Data Loader</h2>
+    <p>Plugin ID: @PluginId</p>
+    
+    <div style="margin-top: 20px;">
+        <h3>Configuration</h3>
+        <div style="background: #f5f5f5; padding: 10px; border-radius: 4px;">
+            <p><strong>Connection String:</strong> @ConnectionString</p>
+            <p><strong>Auth Type:</strong> @AuthType</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <h3>Functionality</h3>
+        <div style="background: #fff3e0; padding: 15px; border-radius: 4px;">
+            <p>📄 Parse JSON files from the configured path</p>
+            <p>🔍 Validate JSON structure and schema</p>
+            <p>⚡ Fast processing of JSON data</p>
+            <p>🔓 No authentication required</p>
+        </div>
+    </div>
+
+    <button @onclick="LoadJsonData"
+            style="margin-top: 20px; padding: 10px 20px; background-color: #17a2b8; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        Load JSON Data
+    </button>
+</div>
+
+@code {
+    private string ConnectionString => Config.ConnectionStrings?.GetValueOrDefault("default") ?? "No connection string configured";
+    private string AuthType => Config.AuthSettings?.Type ?? "none";
+
+    private async Task LoadJsonData()
+    {
+        await Task.Delay(100); // Simulate async operation
+        // In a real implementation, this would load JSON data
+        Console.WriteLine("Loading JSON data...");
+    }
+}
