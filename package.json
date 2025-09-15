@@ -22,8 +22,12 @@
     "build": "npm run lint && react-scripts build",
     "test": "react-scripts test",
     "test:e2e": "playwright test",
+    "test:e2e:blazor": "./node_modules/.bin/playwright test --config=playwright.blazor.config.ts",
     "eject": "react-scripts eject",
-    "lint": "eslint src --ext .tsx,.ts,.js,.jsx --max-warnings 0"
+    "lint": "eslint src --ext .tsx,.ts,.js,.jsx --max-warnings 0",
+    "blazor:build": "cd Dashboard.Blazor && dotnet build",
+    "blazor:run": "cd Dashboard.Blazor && dotnet run",
+    "blazor:test": "npm run blazor:build && npm run test:e2e:blazor"
   },
   "eslintConfig": {
     "extends": [

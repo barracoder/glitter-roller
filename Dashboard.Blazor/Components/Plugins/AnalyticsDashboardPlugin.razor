@@ -1,0 +1,57 @@
+@using Dashboard.Blazor.Models
+@inherits Dashboard.Blazor.Components.Plugins.BasePluginComponent
+
+<div style="padding: 20px;">
+    <h2>Analytics Dashboard</h2>
+    <p>Plugin ID: @PluginId</p>
+    
+    <div style="margin-top: 20px;">
+        <h3>Configuration</h3>
+        <div style="background: #f5f5f5; padding: 10px; border-radius: 4px;">
+            <p><strong>Analytics API:</strong> @ApiUrl</p>
+            <p><strong>Auth Type:</strong> @AuthType</p>
+            <p><strong>Client ID:</strong> @ClientId</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <h3>Analytics Overview</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;" data-testid="analytics-grid">
+            <div style="background: #e3f2fd; padding: 15px; border-radius: 4px;">
+                <h4>Total Users</h4>
+                <p style="font-size: 24px; font-weight: bold; color: #1976d2;">1,234</p>
+            </div>
+            <div style="background: #e8f5e8; padding: 15px; border-radius: 4px;">
+                <h4>Active Sessions</h4>
+                <p style="font-size: 24px; font-weight: bold; color: #388e3c;">567</p>
+            </div>
+            <div style="background: #fff3e0; padding: 15px; border-radius: 4px;">
+                <h4>Total Revenue</h4>
+                <p style="font-size: 24px; font-weight: bold; color: #f57c00;">$12,345</p>
+            </div>
+            <div style="background: #fce4ec; padding: 15px; border-radius: 4px;">
+                <h4>Conversion Rate</h4>
+                <p style="font-size: 24px; font-weight: bold; color: #c2185b;">3.2%</p>
+            </div>
+        </div>
+    </div>
+
+    <button @onclick="RefreshData"
+            style="margin-top: 20px; padding: 10px 20px; background-color: #ffc107; color: black; border: none; border-radius: 4px; cursor: pointer;">
+        Refresh Data
+    </button>
+</div>
+
+@code {
+    private string ApiUrl => Config.ApiBaseUrls?.GetValueOrDefault("analytics") ?? "No analytics API configured";
+    private string AuthType => Config.AuthSettings?.Type ?? "none";
+    private string ClientId => Config.AuthSettings?.Credentials?.GetValueOrDefault("clientId") ?? "No client ID";
+
+    private async Task RefreshData()
+    {
+        await Task.Delay(100); // Simulate async operation
+        // In a real implementation, this would refresh the analytics data
+        // For now, we'll just show a simple alert-like behavior
+        Console.WriteLine("Refreshing analytics data...");
+    }
+}

@@ -1,0 +1,32 @@
+@using Dashboard.Blazor.Models
+
+<div style="flex: 1; height: 100%; overflow: auto; background-color: #ffffff;" data-testid="main-content-area">
+    @if (SelectedPlugin == null)
+    {
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: #6c757d; font-size: 18px;">
+            <div style="font-size: 48px; margin-bottom: 20px;">🔌</div>
+            <h2>Welcome to Glitter Roller</h2>
+            <p>Select a plugin from the navigation panel to get started.</p>
+        </div>
+    }
+    else
+    {
+        <DynamicComponent Type="@SelectedPlugin.ComponentType" 
+                         Parameters="@GetPluginParameters()" />
+    }
+</div>
+
+@code {
+    [Parameter] public Plugin? SelectedPlugin { get; set; }
+
+    private Dictionary<string, object> GetPluginParameters()
+    {
+        if (SelectedPlugin == null) return new Dictionary<string, object>();
+        
+        return new Dictionary<string, object>
+        {
+            { "Config", SelectedPlugin.Metadata.Config },
+            { "PluginId", SelectedPlugin.Metadata.Id }
+        };
+    }
+}

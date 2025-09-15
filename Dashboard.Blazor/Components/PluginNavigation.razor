@@ -1,0 +1,89 @@
+@using Dashboard.Blazor.Models
+
+<div style="width: 300px; height: 100%; background-color: #f8f9fa; border-right: 1px solid #dee2e6; padding: 20px; overflow-y: auto;">
+    <h3 style="margin-bottom: 20px; font-size: 18px; color: #495057;">Plugins</h3>
+    
+    @foreach (var category in PluginHierarchy)
+    {
+        <div style="margin-bottom: 15px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background-color: #e9ecef; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px;"
+                 @onclick="() => ToggleCategory(category.Key)">
+                <span>@category.Key</span>
+                <span style="font-size: 12px;">
+                    @(expandedCategories.GetValueOrDefault(category.Key) ? "▼" : "▶")
+                </span>
+            </div>
+            
+            @if (expandedCategories.GetValueOrDefault(category.Key))
+            {
+                <div style="margin-top: 8px; padding-left: 16px;">
+                    @foreach (var plugin in category.Value)
+                    {
+                        <div style="@GetPluginItemStyle(plugin.Id)"
+                             @onclick="@(() => HandlePluginClick(plugin.Id))"
+                             @onmouseenter="() => HandleMouseEnter(plugin.Id)"
+                             @onmouseleave="() => HandleMouseLeave(plugin.Id)">
+                            <div style="font-weight: 500;">@plugin.Name</div>
+                            @if (!string.IsNullOrEmpty(plugin.Description))
+                            {
+                                <div style="font-size: 11px; margin-top: 2px; opacity: @(SelectedPluginId == plugin.Id ? "0.9" : "0.7");">
+                                    @plugin.Description
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public PluginHierarchy PluginHierarchy { get; set; } = new();
+    [Parameter] public string? SelectedPluginId { get; set; }
+    [Parameter] public EventCallback<string> OnPluginSelect { get; set; }
+
+    private Dictionary<string, bool> expandedCategories = new();
+    private Dictionary<string, bool> hoveredPlugins = new();
+
+    private void ToggleCategory(string category)
+    {
+        expandedCategories[category] = !expandedCategories.GetValueOrDefault(category);
+    }
+
+    private void HandleMouseEnter(string pluginId)
+    {
+        if (SelectedPluginId != pluginId)
+        {
+            hoveredPlugins[pluginId] = true;
+        }
+    }
+
+    private void HandleMouseLeave(string pluginId)
+    {
+        hoveredPlugins[pluginId] = false;
+    }
+
+    private async Task HandlePluginClick(string pluginId)
+    {
+        await OnPluginSelect.InvokeAsync(pluginId);
+    }
+
+    private string GetPluginItemStyle(string pluginId)
+    {
+        var baseStyle = "padding: 8px 16px; margin: 4px 0; border: 1px solid #dee2e6; border-radius: 4px; cursor: pointer; font-size: 13px; transition: all 0.2s;";
+        
+        if (SelectedPluginId == pluginId)
+        {
+            return baseStyle + " background-color: #007bff; color: white; border-color: #007bff;";
+        }
+        else if (hoveredPlugins.GetValueOrDefault(pluginId))
+        {
+            return baseStyle + " background-color: #f8f9fa;";
+        }
+        else
+        {
+            return baseStyle + " background-color: #ffffff;";
+        }
+    }
+}

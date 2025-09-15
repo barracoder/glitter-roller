@@ -1,0 +1,36 @@
+﻿@inherits LayoutComponentBase
+@using Dashboard.Blazor.Services
+@using Dashboard.Blazor.Models
+@inject PluginLoader PluginLoaderService
+
+<div style="display: flex; flex-direction: column; height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;" data-testid="app-container">
+    <AppHeader />
+    <div style="display: flex; flex: 1; overflow: hidden;">
+        <PluginNavigation PluginHierarchy="@pluginHierarchy" 
+                         SelectedPluginId="@selectedPluginId" 
+                         OnPluginSelect="@HandlePluginSelect" />
+        <MainContentArea SelectedPlugin="@selectedPlugin" />
+    </div>
+</div>
+
+@code {
+    private string? selectedPluginId;
+    private Plugin? selectedPlugin;
+    private List<Plugin> loadedPlugins = new();
+    private PluginHierarchy pluginHierarchy = new();
+
+    protected override void OnInitialized()
+    {
+        var appConfig = AppConfigService.GetConfig();
+        PluginLoaderService.Initialize(appConfig);
+        loadedPlugins = PluginLoaderService.LoadPlugins(appConfig.Plugins);
+        pluginHierarchy = PluginLoaderService.GeneratePluginHierarchy(appConfig.Plugins);
+    }
+
+    private void HandlePluginSelect(string pluginId)
+    {
+        selectedPluginId = pluginId;
+        selectedPlugin = loadedPlugins.FirstOrDefault(p => p.Metadata.Id == pluginId);
+        StateHasChanged();
+    }
+}
