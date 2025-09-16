@@ -1,17 +1,17 @@
 # Glitter Roller
 
-Glitter Roller is currently an empty repository prepared for Node.js development. The repository contains only basic setup files and is ready for initial project development.
+Glitter Roller is a multi-technology project that includes both Node.js and .NET/Blazor components. The repository contains setup files for both environments and testing configurations.
 
 **ALWAYS reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.**
 
 ## Repository State
 
-This repository is essentially a blank slate with:
+This repository includes:
 - README.md with basic project title
-- .gitignore configured for Node.js development
-- No package.json, source code, or build configuration
-- No CI/CD pipelines or workflows
-- No dependencies or build tools configured
+- .gitignore configured for Node.js and .NET development
+- .runsettings for .NET test configuration
+- Blazor components in the Blazor directory
+- Mixed technology stack with both JavaScript/Node.js and C#/.NET components
 
 ## Working Effectively
 
@@ -20,10 +20,11 @@ The development environment comes pre-configured with:
 - Node.js v20.19.5
 - npm v10.8.2  
 - git v2.51.0
-- curl and other standard Linux tools
+- .NET SDK 8.0
+- curl and other standard tools
 
-### Initial Project Setup
-When starting development in this repository:
+### Node.js Project Setup
+When working with the Node.js components:
 
 1. **Initialize the Node.js project:**
    ```bash
@@ -51,118 +52,174 @@ When starting development in this repository:
    npm install --save-dev eslint prettier
    ```
 
+### .NET/Blazor Project Setup
+When working with the .NET/Blazor components:
+
+1. **Restore dependencies:**
+   ```bash
+   dotnet restore
+   ```
+   - Takes ~5-30 seconds depending on packages
+
+2. **Build the project:**
+   ```bash
+   dotnet build
+   ```
+   - Takes ~10-60 seconds
+
+3. **Run the Blazor application:**
+   ```bash
+   dotnet run --project ./Blazor/Dashboard.Blazor
+   ```
+   - Application will be available at https://localhost:5001 by default
+
+### Running Tests with .NET
+
+The repository includes a `.runsettings` file that configures:
+- Code coverage collection
+- Test parallelization
+- Test output formats (console, trx, html)
+- Blazor/Playwright test parameters
+
+To run tests with these settings:
+
+```bash
+dotnet test --settings .runsettings
+```
+
 ### Build and Test Commands
 
 Since this is an empty repository, there are no build or test commands yet. When code is added:
 
-1. **Always validate any new package.json scripts before documenting them**
+1. **Always validate any new package.json or .NET project scripts before documenting them**
 2. **Test all build commands with adequate timeouts:**
    - Set timeout to 300+ seconds for build commands
    - Set timeout to 180+ seconds for test commands
    - NEVER CANCEL builds or tests prematurely
 
-3. **Common Node.js patterns to validate:**
+3. **Common .NET patterns to validate:**
    ```bash
-   # If package.json has build script
-   npm run build
+   # Build all projects
+   dotnet build
    
-   # If package.json has test script  
-   npm test
+   # Run all tests
+   dotnet test
    
-   # If package.json has start script
-   npm start
+   # Run with settings
+   dotnet test --settings .runsettings
    
-   # If package.json has dev script
-   npm run dev
+   # Run specific project
+   dotnet run --project ./Blazor/Dashboard.Blazor
    ```
 
 ## Validation Requirements
 
 ### Before Adding New Code
-1. **Always run npm install after adding dependencies**
+1. **Always run appropriate dependency restoration after adding dependencies**
+   - For Node.js: `npm install`
+   - For .NET: `dotnet restore`
 2. **Validate all new scripts work correctly**
 3. **Test with realistic timeouts (never use default short timeouts)**
 
-### Testing New Features
-Since there's no application yet, validation steps will depend on what's built:
+### Testing Blazor Features
+For Blazor applications:
 
-1. **For CLI applications:** Test with `--help` and sample inputs
-2. **For web applications:** Verify server starts and basic routes work
-3. **For libraries:** Run test suites and verify exports
+1. **Verify the application builds:**
+   ```bash
+   dotnet build ./Blazor/Dashboard.Blazor
+   ```
+
+2. **Run tests with code coverage:**
+   ```bash
+   dotnet test --settings .runsettings
+   ```
+   
+3. **Start the application:**
+   ```bash
+   dotnet run --project ./Blazor/Dashboard.Blazor
+   ```
 
 ### Quality Assurance
-When linting/formatting tools are added:
 ```bash
-# Always run before committing
+# For Node.js components
 npm run lint    # if lint script exists
 npm run format  # if format script exists
 npm run test    # if test script exists
+
+# For .NET components
+dotnet format   # for code formatting
+dotnet test     # for running tests
 ```
 
 ## Repository Structure
 
-Currently minimal, but when development begins, follow these patterns:
+The repository structure now includes both Node.js and .NET components:
 
 ```
 glitter-roller/
 ├── .github/
 │   ├── copilot-instructions.md
 │   └── workflows/           # CI/CD when added
-├── src/                     # Source code
-├── test/ or tests/          # Test files
+├── Blazor/
+│   ├── Dashboard.Blazor/    # Blazor application
+│   └── Dashboard.Blazor.Tests/ # Blazor tests
+├── src/                     # Node.js source code
+├── test/ or tests/          # Node.js test files
 ├── docs/                    # Documentation
 ├── package.json             # Node.js configuration
+├── .runsettings            # .NET test configuration
 ├── README.md               # Project documentation
-└── .gitignore              # Already configured
+└── .gitignore              # Configuration for both Node.js and .NET
 ```
 
 ## Common Development Tasks
 
-### Starting a New Node.js Project
-1. `npm init -y` - Initialize package.json
-2. Create src/ directory for source code
-3. Add appropriate dependencies
-4. Set up build and test scripts
-5. Configure linting and formatting
+### Working with Blazor
+1. **Create a new Blazor component:**
+   ```bash
+   dotnet new razorcomponent -n ComponentName -o ./Blazor/Dashboard.Blazor/Components
+   ```
 
-### Adding Dependencies
-- **Production:** `npm install package-name`
-- **Development:** `npm install --save-dev package-name`
-- **Global tools:** `npm install -g package-name` (avoid when possible)
+2. **Add a NuGet package:**
+   ```bash
+   dotnet add ./Blazor/Dashboard.Blazor package PackageName
+   ```
+
+3. **Run Blazor tests:**
+   ```bash
+   dotnet test ./Blazor/Dashboard.Blazor.Tests
+   ```
 
 ### Environment Considerations
-- Node.js and npm are pre-installed and working
-- No firewall restrictions on npm registry
+- Node.js, npm, and .NET SDK are pre-installed and working
+- No firewall restrictions on npm registry or NuGet
 - Git is configured and functional
-- Standard Linux development tools available
+- Standard development tools available
 
 ## Time Expectations
 
-- **npm init:** 1-2 seconds
-- **npm install (empty project):** 5-10 seconds  
-- **npm install (with dependencies):** 10-60 seconds
-- **Build commands:** Variable (allow 5+ minutes)
-- **Test suites:** Variable (allow 3+ minutes)
+- **npm operations:** Same as before
+- **dotnet restore:** 5-30 seconds
+- **dotnet build:** 10-60 seconds
+- **dotnet test:** 30+ seconds (more with code coverage)
+- **dotnet run:** 5-15 seconds to start
 
 **CRITICAL: NEVER CANCEL operations. Always use generous timeouts and wait for completion.**
 
-## Current Limitations
+## Current Configuration
 
-1. **No application code exists** - this is a fresh repository
-2. **No build system configured** - needs to be set up based on project needs
-3. **No testing framework** - choose based on project requirements
-4. **No CI/CD pipelines** - GitHub Actions workflows need to be created
+1. **Blazor Components** - Located in the Blazor directory
+2. **Test Configuration** - Defined in .runsettings with code coverage settings
+3. **Code Coverage** - Configured to analyze Blazor code and exclude tests
+4. **Test Output** - Configured for console, trx, and html formats
 
 ## Next Steps for Development
 
-When beginning development:
-1. Define project purpose and update README.md
-2. Initialize package.json with `npm init`
-3. Set up basic project structure (src/, test/, etc.)
-4. Choose and configure build tools (TypeScript, bundlers, etc.)
-5. Set up testing framework (Jest, Mocha, etc.)
-6. Configure linting and formatting (ESLint, Prettier)
-7. Create GitHub Actions workflow for CI/CD
-8. Update these instructions with project-specific guidance
+When continuing development:
+1. Ensure Blazor components follow the structure defined in existing code
+2. Keep test coverage high by adding tests for new components
+3. Configure CI/CD to run both Node.js and .NET tests
+4. Consider adding cross-platform testing with Playwright as configured in .runsettings
+5. Document any additional setup requirements specific to the project
 
-**Remember: This repository is a blank slate. All development tooling and patterns will need to be established based on the specific project requirements.**
+**Remember: This repository now combines Node.js and .NET/Blazor technologies. All development tooling and patterns should respect the multi-technology approach of the project.**

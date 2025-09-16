@@ -25,8 +25,8 @@
     "test:e2e:blazor": "npx playwright test --config=playwright.blazor.config.ts --reporter=list",
     "eject": "react-scripts eject",
     "lint": "eslint src --ext .tsx,.ts,.js,.jsx --max-warnings 0 && tsc --noEmit",
-    "blazor:build": "cd Dashboard.Blazor && dotnet build",
-    "blazor:run": "cd Dashboard.Blazor && dotnet run",
+    "blazor:build": "cd ../Blazor/Dashboard.Blazor && dotnet build",
+    "blazor:run": "cd ../Blazor/Dashboard.Blazor && dotnet run",
     "blazor:test": "npm run blazor:build && npm run test:e2e:blazor"
   },
   "eslintConfig": {

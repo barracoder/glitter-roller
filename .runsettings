@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <RunConfiguration>
+    <!-- 0 = As many processes as possible, limited by number of cores on machine, 1 = Sequential (1 process), 2-> Given number of processes up to limit by number of cores on machine-->
+    <MaxCpuCount>0</MaxCpuCount>
+    <!-- Path to Test Adapters -->
+    <TestAdaptersPaths>%UserProfile%\.nuget\packages</TestAdaptersPaths>
+    <!-- Results directory -->
+    <ResultsDirectory>TestResults</ResultsDirectory>
+    <!-- Framework version for test execution -->
+    <TargetFrameworkVersion>net8.0</TargetFrameworkVersion>
+    <!-- Treat test adapter errors as warnings -->
+    <TreatTestAdapterErrorsAsWarnings>false</TreatTestAdapterErrorsAsWarnings>
+  </RunConfiguration>
+
+  <!-- MSTest configuration -->
+  <MSTest>
+    <MapInconclusiveToFailed>false</MapInconclusiveToFailed>
+    <CaptureTraceOutput>true</CaptureTraceOutput>
+    <DeleteDeploymentDirectoryAfterTestRunIsComplete>false</DeleteDeploymentDirectoryAfterTestRunIsComplete>
+    <DeploymentEnabled>false</DeploymentEnabled>
+    <Parallelize>
+      <Workers>0</Workers>
+      <Scope>MethodLevel</Scope>
+    </Parallelize>
+  </MSTest>
+
+  <!-- Data collection -->
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="Code Coverage" uri="datacollector://Microsoft/CodeCoverage/2.0" assemblyQualifiedName="Microsoft.VisualStudio.Coverage.DynamicCoverageDataCollector, Microsoft.VisualStudio.TraceCollector, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <Configuration>
+          <CodeCoverage>
+            <ModulePaths>
+              <Exclude>
+                <ModulePath>.*CPPUnitTestFramework.*</ModulePath>
+                <ModulePath>.*\.Tests\..*</ModulePath>
+                <ModulePath>.*\.Test\..*</ModulePath>
+              </Exclude>
+            </ModulePaths>
+            <Sources>
+              <Include>
+                <Source>.\Blazor\Dashboard.Blazor\**\*.cs</Source>
+              </Include>
+              <Exclude>
+                <Source>.\Blazor\Dashboard.Blazor.Tests\**\*.cs</Source>
+                <Source>.*\\bin\\**</Source>
+                <Source>.*\\obj\\**</Source>
+              </Exclude>
+            </Sources>
+          </CodeCoverage>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+
+  <!-- Playwright specific settings (if using Playwright) -->
+  <TestRunParameters>
+    <Parameter name="webAppUrl" value="http://localhost:5278" />
+    <Parameter name="headless" value="true" />
+    <Parameter name="slowMo" value="0" />
+    <Parameter name="timeout" value="30000" />
+  </TestRunParameters>
+
+  <!-- Logging -->
+  <LoggerRunSettings>
+    <Loggers>
+      <Logger friendlyName="console" enabled="True">
+        <Configuration>
+          <Verbosity>quiet</Verbosity>
+        </Configuration>
+      </Logger>
+      <Logger friendlyName="trx" enabled="True">
+        <Configuration>
+          <LogFileName>TestResults.trx</LogFileName>
+        </Configuration>
+      </Logger>
+      <Logger friendlyName="html" enabled="True">
+        <Configuration>
+          <LogFileName>TestResults.html</LogFileName>
+        </Configuration>
+      </Logger>
+    </Loggers>
+  </LoggerRunSettings>
+</RunSettings>
