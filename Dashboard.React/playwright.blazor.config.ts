@@ -20,7 +20,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'cd ../Dashboard.Blazor && dotnet run',
+    command: 'cd ../Blazor/Dashboard.Blazor && dotnet run',
     url: 'http://localhost:5278',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
