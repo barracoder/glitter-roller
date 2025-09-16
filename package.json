@@ -7,19 +7,19 @@
   "scripts": {
     "test": "cd Dashboard.React && npm test",
     "test:react": "cd Dashboard.React && npm test",
-    "test:blazor": "cd Blazor/Dashboard.Blazor && dotnet test",
+    "test:blazor": "cd Blazor && dotnet test",
     "test:all": "npm run test:react && npm run test:blazor",
     "test:e2e": "cd Dashboard.React && npm run test:e2e",
-    "test:e2e:blazor": "cd Dashboard.React && npm run test:e2e:blazor",
+    "test:e2e:blazor": "npx playwright test --config=playwright/blazor.config.ts --reporter=list",
     "test:e2e:all": "npm run test:e2e && npm run test:e2e:blazor",
     "test:full": "npm run test:all && npm run test:e2e:all",
     "lint": "cd Dashboard.React && npm run lint",
     "start": "cd Dashboard.React && npm start",
     "start:react": "cd Dashboard.React && npm start",
-    "start:blazor": "cd Blazor/Dashboard.Blazor && dotnet run",
+    "start:blazor": "cd Blazor && dotnet run",
     "build": "cd Dashboard.React && npm run build",
     "build:react": "cd Dashboard.React && npm run build",
-    "build:blazor": "cd Blazor/Dashboard.Blazor && dotnet build",
+    "build:blazor": "cd Blazor && dotnet build",
     "build:all": "npm run build:react && npm run build:blazor"
   }
 }

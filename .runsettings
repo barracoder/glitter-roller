@@ -56,7 +56,7 @@
 
   <!-- Playwright specific settings (if using Playwright) -->
   <TestRunParameters>
-    <Parameter name="webAppUrl" value="https://localhost:5001" />
+    <Parameter name="webAppUrl" value="http://localhost:5278" />
     <Parameter name="headless" value="true" />
     <Parameter name="slowMo" value="0" />
     <Parameter name="timeout" value="30000" />

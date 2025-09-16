@@ -95,9 +95,10 @@ jobs:
       run: npx playwright install --with-deps
       
     - name: Build Blazor application
-      run: |
-        cd Dashboard.Blazor
-        dotnet build
+      run: npm run build:blazor
+        
+    - name: Run .NET tests
+      run: npm run test:blazor
       
     - name: Run Blazor E2E tests
       run: npm run test:e2e:blazor
