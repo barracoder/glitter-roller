@@ -6,7 +6,7 @@
     <!-- Path to Test Adapters -->
     <TestAdaptersPaths>%UserProfile%\.nuget\packages</TestAdaptersPaths>
     <!-- Results directory -->
-    <ResultsDirectory>.\TestResults</ResultsDirectory>
+    <ResultsDirectory>TestResults</ResultsDirectory>
     <!-- Framework version for test execution -->
     <TargetFrameworkVersion>net8.0</TargetFrameworkVersion>
     <!-- Treat test adapter errors as warnings -->

@@ -172,6 +172,15 @@ Thumbs.db
 *.bak
 *.tmp
 
+# Test Results
+**/TestResults/
+**/*.coverage
+**/*.trx
+**/*.dotCover
+**/*.dcvr
+**/lcov.info
+**/TestResults.html
+
 # Visual Studio
 .vs/
 *.vspscc
